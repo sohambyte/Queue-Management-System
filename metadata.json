@@ -1,0 +1,7 @@
+{
+  "name": "Q-Master Pro: Queue Management System",
+  "description": "A comprehensive queue management system for hospitals, temples, and service centers with real-time tracking, token generation, and role-based access control.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
