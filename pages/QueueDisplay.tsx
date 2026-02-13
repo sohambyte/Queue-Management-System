@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { mockApi } from '../services/mockApi';
 import { Token, Counter, TokenStatus } from '../types';
+import { Link } from 'react-router-dom';
+import { ArrowLeft, Home } from 'lucide-react';
 
 const QueueDisplay: React.FC = () => {
   const [activeTokens, setActiveTokens] = useState<Token[]>([]);
@@ -29,11 +31,21 @@ const QueueDisplay: React.FC = () => {
   return (
     <div className="min-h-screen bg-matt-black text-white p-0 flex flex-col overflow-hidden">
       {/* Top Banner */}
-      <header className="bg-light-orange text-matt-black py-6 px-12 flex justify-between items-center shadow-lg">
-        <div>
-           <h1 className="text-4xl font-black">LIVE QUEUE BOARD</h1>
-           <p className="font-bold opacity-70">Please wait for your token to be called</p>
+      <header className="bg-light-orange text-matt-black py-6 px-12 flex justify-between items-center shadow-lg relative">
+        <div className="flex items-center space-x-6">
+          <Link 
+            to="/" 
+            className="p-3 bg-matt-black text-light-orange rounded-2xl hover:scale-110 transition-transform shadow-xl flex items-center justify-center"
+            title="Back to Portal"
+          >
+            <Home size={24} />
+          </Link>
+          <div>
+             <h1 className="text-4xl font-black">LIVE QUEUE BOARD</h1>
+             <p className="font-bold opacity-70">Please wait for your token to be called</p>
+          </div>
         </div>
+        
         <div className="text-right">
           <p className="text-2xl font-black">{now.toLocaleTimeString()}</p>
           <p className="font-bold opacity-70">{now.toLocaleDateString()}</p>
@@ -43,10 +55,17 @@ const QueueDisplay: React.FC = () => {
       <div className="flex-1 flex overflow-hidden">
         {/* Left Side: Now Serving */}
         <div className="w-2/3 p-12 overflow-auto">
-          <h2 className="text-2xl font-bold mb-8 flex items-center space-x-3">
-             <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
-             <span>NOW SERVING</span>
-          </h2>
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-bold flex items-center space-x-3">
+               <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
+               <span>NOW SERVING</span>
+            </h2>
+            <Link to="/get-token" className="text-light-orange hover:underline font-bold flex items-center space-x-2">
+              <span>Get your token remote</span>
+              <ArrowLeft size={16} className="rotate-180" />
+            </Link>
+          </div>
+          
           <div className="grid grid-cols-1 gap-8">
              {currentlyServing.length > 0 ? currentlyServing.map(token => (
                <div key={token.id} className="bg-white/5 border-2 border-light-orange/30 p-10 rounded-[3rem] flex justify-between items-center animate-in slide-in-from-left duration-500">
@@ -60,7 +79,7 @@ const QueueDisplay: React.FC = () => {
                   </div>
                </div>
              )) : (
-               <div className="p-20 text-center text-gray-500 italic text-2xl">
+               <div className="p-20 text-center text-gray-500 italic text-2xl bg-white/5 rounded-[3rem]">
                  No active service at the moment
                </div>
              )}

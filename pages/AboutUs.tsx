@@ -1,14 +1,29 @@
 
 import React from 'react';
-import { MapPin, Phone, Mail, Clock, ShieldCheck, HeartPulse, Award } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ShieldCheck, HeartPulse, Award, Home, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AboutUs: React.FC = () => {
   return (
-    <div className="min-h-screen bg-soft-gray">
+    <div className="min-h-screen bg-soft-gray relative">
+      {/* Navigation - Top Left */}
+      <div className="absolute top-6 left-6 z-10 flex items-center space-x-4">
+        <Link 
+          to="/" 
+          className="p-3 bg-white text-matt-black rounded-xl shadow-lg hover:scale-110 transition-transform flex items-center justify-center"
+          title="Back to Home"
+        >
+          <Home size={20} />
+        </Link>
+        <div className="hidden md:flex items-center space-x-2">
+          <div className="w-8 h-8 bg-light-orange rounded flex items-center justify-center text-matt-black font-bold">Q</div>
+          <span className="font-bold text-white drop-shadow-md">Q-Master Info</span>
+        </div>
+      </div>
+
       {/* Header section */}
-      <div className="bg-matt-black text-white py-20 px-6 text-center">
-        <div className="inline-flex items-center justify-center w-20 h-20 bg-light-orange rounded-3xl mb-6 text-matt-black font-bold text-4xl">
+      <div className="bg-matt-black text-white py-24 px-6 text-center">
+        <div className="inline-flex items-center justify-center w-20 h-20 bg-light-orange rounded-3xl mb-6 text-matt-black font-bold text-4xl shadow-2xl">
           Q
         </div>
         <h1 className="text-5xl font-black mb-4">Q-Master Medical Center</h1>
@@ -54,17 +69,17 @@ const AboutUs: React.FC = () => {
               We leverage real-time data to optimize department performance and provide our visitors with up-to-the-minute information about their status.
             </p>
             <div className="pt-6 border-t border-gray-100 space-y-4">
-              <div className="flex items-center space-x-4 text-matt-black">
-                <MapPin className="text-light-orange" />
-                <span className="font-semibold">123 Healthcare Blvd, Medical District</span>
+              <div className="flex items-start space-x-4 text-matt-black">
+                <MapPin className="text-light-orange flex-shrink-0 mt-1" />
+                <span className="font-semibold leading-snug">Rathi Complex 3rd Floor Salisbury Park Swargate 411001</span>
               </div>
               <div className="flex items-center space-x-4 text-matt-black">
-                <Phone className="text-light-orange" />
-                <span className="font-semibold">+1 (555) 123-4567</span>
+                <Phone className="text-light-orange flex-shrink-0" />
+                <span className="font-semibold">+91 8989898089</span>
               </div>
               <div className="flex items-center space-x-4 text-matt-black">
-                <Mail className="text-light-orange" />
-                <span className="font-semibold">contact@qmaster.med</span>
+                <Mail className="text-light-orange flex-shrink-0" />
+                <span className="font-semibold">queuemanagement@sibar.com</span>
               </div>
             </div>
           </div>
@@ -95,7 +110,7 @@ const AboutUs: React.FC = () => {
           </div>
         </div>
 
-        <div className="text-center">
+        <div className="text-center pt-8">
            <Link to="/login" className="text-gray-400 hover:text-light-orange font-medium transition-colors">
               Staff Portal Login
            </Link>
