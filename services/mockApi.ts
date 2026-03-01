@@ -98,6 +98,31 @@ export const mockApi = {
       resolve(nextToken);
     });
   },
+  callSpecificToken: (tokenId: number, counterId: number) => {
+    return new Promise<Token>((resolve, reject) => {
+      const counter = counters.find(c => c.id === counterId);
+      if (!counter) {
+        reject("Counter not found");
+        return;
+      }
+      
+      const token = tokens.find(t => t.id === tokenId);
+      if (!token) {
+        reject("Token not found");
+        return;
+      }
+      
+      if (token.status !== TokenStatus.WAITING) {
+        reject("Token is not in waiting state");
+        return;
+      }
+      
+      token.status = TokenStatus.CALLED;
+      token.calledAt = new Date().toISOString();
+      token.counterId = counterId;
+      resolve(token);
+    });
+  },
   completeToken: (tokenId: number) => {
     const token = tokens.find(t => t.id === tokenId);
     if (token) {
